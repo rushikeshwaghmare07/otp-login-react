@@ -1,9 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 export const OtpInput = ({length = 4, onOtpSubmit = () => { } }) => {
 
   const [otp, setOtp] = useState(new Array(length).fill(""))
-  console.log(otp);
+
+  const inputRefs = useRef([]);
+  
+  useEffect(() => {
+    if (inputRefs.current[0]) {
+      inputRefs.current[0].focus()
+    }
+  }, []);
+
+  console.log(inputRefs);
 
   const handleChange = () => {};
   const handleClick = () => {};
@@ -14,6 +23,7 @@ export const OtpInput = ({length = 4, onOtpSubmit = () => { } }) => {
       {
         otp.map((value, index) => {
           return <input key={index} type="text" value={value}
+          ref={(input) => (inputRefs.current[index] = input)}
           onChange = {(e) => handleChange(index, e)}
           onClick = {() => handleClick(index)}
           onKeyDown = {(e) => handleKeyDown(index, e)}
