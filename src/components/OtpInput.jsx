@@ -12,9 +12,22 @@ export const OtpInput = ({length = 4, onOtpSubmit = () => { } }) => {
     }
   }, []);
 
-  console.log(inputRefs);
+  const handleChange = (index, e) => {
+    const value = e.target.value;
+    if (isNaN(value)) return;
 
-  const handleChange = () => {};
+    const newOtp = [...otp];
+    // allow only one input
+    newOtp[index] = value.substring(value.length - 1);
+    setOtp(newOtp);
+
+    // submit trigger
+    const combinedOtp = newOtp.join("");
+    if (combinedOtp.length === length) {
+      onOtpSubmit(combinedOtp);
+    }
+  };
+
   const handleClick = () => {};
   const handleKeyDown = () => {};
 
