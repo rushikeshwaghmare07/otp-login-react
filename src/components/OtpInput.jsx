@@ -26,6 +26,11 @@ export const OtpInput = ({length = 4, onOtpSubmit = () => { } }) => {
     if (combinedOtp.length === length) {
       onOtpSubmit(combinedOtp);
     }
+
+    // move to next input if current field is filled
+    if (value && index < length - 1 && inputRefs.current[index + 1]) {
+      inputRefs.current[index + 1].focus();
+    }
   };
 
   const handleClick = () => {};
