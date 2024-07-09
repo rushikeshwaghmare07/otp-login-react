@@ -28,8 +28,12 @@ export const OtpInput = ({length = 4, onOtpSubmit = () => { } }) => {
     }
 
     // move to next input if current field is filled
-    if (value && index < length - 1 && inputRefs.current[index + 1]) {
-      inputRefs.current[index + 1].focus();
+    // if (value && index < length - 1 && inputRefs.current[index + 1]) {
+    //   inputRefs.current[index + 1].focus();
+    // }
+    const nextEmptyIndex = newOtp.findIndex((v, i) => i > index && v === "");
+    if (nextEmptyIndex !== -1 && inputRefs.current[nextEmptyIndex]) {
+      inputRefs.current[nextEmptyIndex].focus();
     }
   };
 
